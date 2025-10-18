@@ -10,7 +10,8 @@ SemanticShoresDB contains realistic property listings with pre-computed text emb
 
 - SQL Server 2025 RC1 or later (compatibility level 170)
 - Support for VECTOR data type
-- ~600MB disk space
+- ~600MB disk space for backup file
+- ~1GB disk space for restored database
 
 ## Database Contents
 
