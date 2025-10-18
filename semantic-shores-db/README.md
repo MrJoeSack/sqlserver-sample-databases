@@ -18,7 +18,7 @@ SemanticShoresDB contains realistic property listings with pre-computed text emb
 
 **properties** (100,000 rows)
 - Property listings with addresses, features, and descriptions
-- Each property includes a 768-dimension vector embedding
+- Each property includes a 1536-dimension vector embedding
 - Indexed for fast semantic similarity search
 
 ```sql
@@ -39,7 +39,7 @@ CREATE TABLE properties (
     listing_date DATE,
     agent_id INT,
     listing_description NVARCHAR(MAX),
-    description_vector VECTOR(768) NULL,
+    description_vector VECTOR(1536) NULL,
     image_filename NVARCHAR(255) NULL
 );
 
@@ -69,7 +69,7 @@ CREATE TABLE agents (
 CREATE TABLE search_phrases (
     search_id INT PRIMARY KEY,
     search_phrase NVARCHAR(500),
-    search_vector VECTOR(768) NULL,
+    search_vector VECTOR(1536) NULL,
     category NVARCHAR(50) NULL,
     created_date DATETIME2
 );
@@ -77,8 +77,9 @@ CREATE TABLE search_phrases (
 
 ## Vector Embeddings
 
-- **Model**: Text embeddings generated using standard embedding models
-- **Dimensions**: 768 (compatible with common embedding APIs)
+- **Model**: OpenAI text-embedding-3-small
+- **Dimensions**: 1536
+- **Distance Metric**: Cosine similarity
 - **Purpose**: Enable semantic similarity search on property descriptions
 
 ## Restore Instructions

@@ -5,7 +5,7 @@ Sample databases for SQL Server demonstrations and learning.
 ## Databases
 
 ### [semantic-shores-db](./semantic-shores-db/)
-Real estate property database demonstrating SQL Server 2025 vector search capabilities. Includes 100,000 properties with text embeddings for semantic search.
+Real estate property database demonstrating SQL Server 2025 vector search capabilities. Includes 100,000 properties with 1536-dimensional text embeddings for semantic search.
 
 ## Requirements
 
