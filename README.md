@@ -8,7 +8,7 @@ Sample databases for SQL Server demonstrations and learning.
 Real estate property database demonstrating SQL Server 2025 vector search capabilities. Includes 100,000 properties with 1536-dimensional text embeddings for semantic search.
 
 ### [semantic-depths-db](./semantic-depths-db/)
-Real estate embedding comparison database for testing OpenAI's text-embedding-3-large (3072-dim) vs text-embedding-3-small (1536-dim). Includes 100,000 properties with dual embeddings and 20 test queries for your own evaluation.
+Real estate database with text-embedding-3-large (3072-dim) embeddings for the same 100,000 properties in semantic-shores-db. Use both databases together to compare semantic precision between OpenAI's large and small embedding models.
 
 ## Requirements
 

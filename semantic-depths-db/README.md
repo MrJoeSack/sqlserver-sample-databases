@@ -1,16 +1,17 @@
 # SemanticDepthsDB
 
-Real estate embedding comparison database used to test OpenAI's text-embedding-3-large (3072 dimensions) vs text-embedding-3-small (1536 dimensions) models. Contains 100,000 property descriptions with embeddings from both models for semantic search testing and evaluation.
+Real estate database with text-embedding-3-large (3072 dimensions) embeddings. Contains 100,000 property descriptions for comparing semantic precision against text-embedding-3-small.
 
 ## Database Overview
 
-This database was created to evaluate the semantic precision differences between OpenAI's large and small embedding models through real-world real estate search scenarios.
+This database contains text-embedding-3-large embeddings for the same 100,000 properties found in SemanticShoresDB. Use both databases together to evaluate the semantic precision differences between OpenAI's large and small embedding models.
 
 **Key Features:**
 - 100,000 synthetic real estate property descriptions
-- Dual embeddings: Both text-embedding-3-large (3072-dim) and text-embedding-3-small (1536-dim)
+- text-embedding-3-large embeddings (3072-dim float16)
 - 20 test queries across 8 semantic dimensions
 - SQL Server 2025 float16 vector support (2 bytes per dimension)
+- Same properties as SemanticShoresDB for direct comparison
 
 ## Schema
 
@@ -33,8 +34,7 @@ This database was created to evaluate the semantic precision differences between
 - `listing_date` (DATE): Date listed
 - `agent_id` (INT): Agent identifier
 - `listing_description` (NVARCHAR): Property description text
-- `description_vector_large` (VECTOR): text-embedding-3-large vector (3072-dim float16)
-- `description_vector_small` (VECTOR): text-embedding-3-small vector (1536-dim float32)
+- `description_vector` (VECTOR): text-embedding-3-large vector (3072-dim float16)
 - `image_filename` (NVARCHAR): Associated image filename
 
 **deep.SearchPhrases**
@@ -54,9 +54,9 @@ This database was created to evaluate the semantic precision differences between
 ## Use Cases
 
 This database is ideal for:
-- **Embedding Model Evaluation**: Compare large vs small model performance on your own queries
-- **Vector Search Testing**: Test SQL Server 2025 vector search with real-world data
-- **Float16 Exploration**: Understand float16 vector storage benefits
+- **Embedding Model Evaluation**: Compare text-embedding-3-large vs text-embedding-3-small (requires both SemanticDepthsDB and SemanticShoresDB)
+- **Vector Search Testing**: Test SQL Server 2025 vector search with high-dimensional embeddings
+- **Float16 Exploration**: Understand float16 vector storage benefits (3072 dimensions at 2 bytes each)
 - **Semantic Search Learning**: Learn how embedding models handle nuanced queries
 - **Cost Analysis**: Evaluate if 3.25× cost difference justifies semantic precision gains
 
@@ -96,9 +96,9 @@ SELECT TOP 10
     street_address,
     property_type,
     listing_description,
-    VECTOR_DISTANCE('cosine', description_vector_large, @search_vector) AS distance
+    VECTOR_DISTANCE('cosine', description_vector, @search_vector) AS distance
 FROM deep.Properties
-ORDER BY VECTOR_DISTANCE('cosine', description_vector_large, @search_vector);
+ORDER BY VECTOR_DISTANCE('cosine', description_vector, @search_vector);
 ```
 
 ### Explore Test Queries
@@ -111,22 +111,24 @@ ORDER BY search_id;
 
 ### Compare Models on Same Query
 ```sql
--- Compare top results from both embedding models for the same query
+-- Compare results from both embedding models for the same query
+-- Requires both SemanticDepthsDB (large) and SemanticShoresDB (small)
+
 DECLARE @search_vector_large VECTOR(3072, float16);
 DECLARE @search_vector_small VECTOR(1536, float32);
 -- (Get these from OpenAI's API for your query text)
 
--- Results from text-embedding-3-large
+-- Results from text-embedding-3-large (SemanticDepthsDB)
 SELECT TOP 10 'LARGE' AS model, property_id, property_type, listing_description,
-    VECTOR_DISTANCE('cosine', description_vector_large, @search_vector_large) AS distance
-FROM deep.Properties
-ORDER BY VECTOR_DISTANCE('cosine', description_vector_large, @search_vector_large);
+    VECTOR_DISTANCE('cosine', description_vector, @search_vector_large) AS distance
+FROM SemanticDepthsDB.deep.Properties
+ORDER BY VECTOR_DISTANCE('cosine', description_vector, @search_vector_large);
 
--- Results from text-embedding-3-small
+-- Results from text-embedding-3-small (SemanticShoresDB)
 SELECT TOP 10 'SMALL' AS model, property_id, property_type, listing_description,
-    VECTOR_DISTANCE('cosine', description_vector_small, @search_vector_small) AS distance
-FROM deep.Properties
-ORDER BY VECTOR_DISTANCE('cosine', description_vector_small, @search_vector_small);
+    VECTOR_DISTANCE('cosine', description_vector, @search_vector_small) AS distance
+FROM SemanticShoresDB.deep.Properties
+ORDER BY VECTOR_DISTANCE('cosine', description_vector, @search_vector_small);
 ```
 
 ## Related Blog Post
