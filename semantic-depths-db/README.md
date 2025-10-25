@@ -127,7 +127,7 @@ ORDER BY VECTOR_DISTANCE('cosine', description_vector, @search_vector_large);
 -- Results from text-embedding-3-small (SemanticShoresDB)
 SELECT TOP 10 'SMALL' AS model, property_id, property_type, listing_description,
     VECTOR_DISTANCE('cosine', description_vector, @search_vector_small) AS distance
-FROM SemanticShoresDB.deep.Properties
+FROM SemanticShoresDB.dbo.properties
 ORDER BY VECTOR_DISTANCE('cosine', description_vector, @search_vector_small);
 ```
 
