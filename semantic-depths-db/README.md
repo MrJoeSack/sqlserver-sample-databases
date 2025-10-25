@@ -10,7 +10,6 @@ This database was created to evaluate the semantic precision differences between
 - 100,000 synthetic real estate property descriptions
 - Dual embeddings: Both text-embedding-3-large (3072-dim) and text-embedding-3-small (1536-dim)
 - 20 test queries across 8 semantic dimensions
-- 400 evaluation results from blind LLM judge
 - SQL Server 2025 float16 vector support (2 bytes per dimension)
 
 ## Schema
@@ -34,14 +33,14 @@ This database was created to evaluate the semantic precision differences between
 - `listing_date` (DATE): Date listed
 - `agent_id` (INT): Agent identifier
 - `listing_description` (NVARCHAR): Property description text
-- `description_vector` (VECTOR): Embedding vector (3072-dim float16 OR 1536-dim float32)
+- `description_vector_large` (VECTOR): text-embedding-3-large vector (3072-dim float16)
+- `description_vector_small` (VECTOR): text-embedding-3-small vector (1536-dim float32)
 - `image_filename` (NVARCHAR): Associated image filename
 
 **deep.SearchPhrases**
-- Test queries used for evaluation (20 queries across architectural styles, lifestyle concepts, compound requirements, etc.)
-
-**deep.ComparisonResults**
-- Evaluation results from blind LLM judge comparing model outputs
+- `search_id` (INT): Unique query identifier
+- `search_phrase` (NVARCHAR): Test query text
+- `category` (NVARCHAR): Query category (architectural styles, lifestyle concepts, compound requirements, etc.)
 
 ## Database Statistics
 
@@ -88,18 +87,18 @@ WITH MOVE 'SemanticDepthsDB' TO 'C:\Data\SemanticDepthsDB.mdf',
 
 ### Basic Vector Search
 ```sql
--- Find properties similar to a query embedding
+-- Find properties similar to a query embedding (using text-embedding-3-large)
 DECLARE @search_vector VECTOR(3072, float16);
--- (Set @search_vector to your query embedding)
+-- (Set @search_vector to your query embedding from OpenAI)
 
 SELECT TOP 10
     property_id,
     street_address,
     property_type,
     listing_description,
-    VECTOR_DISTANCE('cosine', description_vector, @search_vector) AS distance
+    VECTOR_DISTANCE('cosine', description_vector_large, @search_vector) AS distance
 FROM deep.Properties
-ORDER BY VECTOR_DISTANCE('cosine', description_vector, @search_vector);
+ORDER BY VECTOR_DISTANCE('cosine', description_vector_large, @search_vector);
 ```
 
 ### Explore Test Queries
@@ -110,12 +109,24 @@ FROM deep.SearchPhrases
 ORDER BY search_id;
 ```
 
-### Comparison Results
+### Compare Models on Same Query
 ```sql
--- See evaluation results
-SELECT TOP 10 *
-FROM deep.ComparisonResults
-ORDER BY search_id, model, rank;
+-- Compare top results from both embedding models for the same query
+DECLARE @search_vector_large VECTOR(3072, float16);
+DECLARE @search_vector_small VECTOR(1536, float32);
+-- (Get these from OpenAI's API for your query text)
+
+-- Results from text-embedding-3-large
+SELECT TOP 10 'LARGE' AS model, property_id, property_type, listing_description,
+    VECTOR_DISTANCE('cosine', description_vector_large, @search_vector_large) AS distance
+FROM deep.Properties
+ORDER BY VECTOR_DISTANCE('cosine', description_vector_large, @search_vector_large);
+
+-- Results from text-embedding-3-small
+SELECT TOP 10 'SMALL' AS model, property_id, property_type, listing_description,
+    VECTOR_DISTANCE('cosine', description_vector_small, @search_vector_small) AS distance
+FROM deep.Properties
+ORDER BY VECTOR_DISTANCE('cosine', description_vector_small, @search_vector_small);
 ```
 
 ## Related Blog Post
