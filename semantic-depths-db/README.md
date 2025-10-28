@@ -76,6 +76,8 @@ EXEC sp_configure 'PREVIEW_FEATURES', 1;
 RECONFIGURE;
 
 -- Restore database
+-- WARNING: The REPLACE option will overwrite any existing database named SemanticDepthsDB
+-- Verify no production database uses this name before running this command
 RESTORE DATABASE SemanticDepthsDB
 FROM DISK = 'path\to\SemanticDepthsDB.bak'
 WITH MOVE 'SemanticDepthsDB' TO 'C:\Data\SemanticDepthsDB.mdf',
