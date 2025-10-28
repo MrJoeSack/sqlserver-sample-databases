@@ -127,6 +127,8 @@ CROSS APPLY AI_GENERATE_CHUNKS(
 ## Restore Instructions
 
 ```sql
+-- WARNING: The REPLACE option will overwrite any existing database named SemanticInspectDB
+-- Verify no production database uses this name before running this command
 RESTORE DATABASE SemanticInspectDB
 FROM DISK = 'path\to\SemanticInspectDB.bak'
 WITH MOVE 'SemanticInspectDB' TO 'C:\SQLData\SemanticInspectDB.mdf',
