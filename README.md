@@ -10,6 +10,9 @@ Real estate property database demonstrating SQL Server 2025 vector search capabi
 ### [semantic-depths-db](./semantic-depths-db/)
 Real estate database with text-embedding-3-large (3072-dim) embeddings for the same 100,000 properties in semantic-shores-db. Use both databases together to compare semantic precision between OpenAI's large and small embedding models.
 
+### [semanticinspectdb](./semanticinspectdb/)
+Property inspection database demonstrating SQL Server 2025 text chunking with AI_GENERATE_CHUNKS. Includes 401 inspection reports chunked into 1,682 segments with pre-generated embeddings for comparing diluted vs non-diluted search.
+
 ## Requirements
 
 - SQL Server 2025 RC1 or later
