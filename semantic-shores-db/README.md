@@ -86,6 +86,8 @@ CREATE TABLE search_phrases (
 ## Restore Instructions
 
 ```sql
+-- WARNING: The REPLACE option will overwrite any existing database named SemanticShoresDB
+-- Verify no production database uses this name before running this command
 RESTORE DATABASE SemanticShoresDB
 FROM DISK = 'path\to\SemanticShoresDB_20251018.bak'
 WITH MOVE 'SemanticShoresDB' TO 'C:\SQLData\SemanticShoresDB.mdf',
