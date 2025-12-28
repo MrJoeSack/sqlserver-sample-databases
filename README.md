@@ -13,6 +13,9 @@ Real estate database with text-embedding-3-large (3072-dim) embeddings for the s
 ### [SemanticInspectDB](./semanticinspectdb/)
 Property inspection database demonstrating SQL Server 2025 text chunking with AI_GENERATE_CHUNKS. Includes 401 inspection reports chunked into 1,682 segments with pre-generated embeddings for comparing diluted vs non-diluted search.
 
+### [SemanticSonarDB](./semantic-sonar-db/)
+Extends SemanticShoresDB with normalized embedding tables, model comparison data (bge-m3 1024-dim + all-minilm 384-dim), inspection reports, HOA documents, and ground truth for quality metrics. Demonstrates hybrid search, RAG, chunking, reranking, and production patterns.
+
 ## Requirements
 
 - SQL Server 2025 RC1 or later
