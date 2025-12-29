@@ -75,6 +75,15 @@ CREATE TABLE PropertyEmbeddings_384 (
 
 **BuyerSearchCases** (50 rows) / **BuyerSearchRelevance** (5,000 rows)
 - Ground truth data for quality metrics
+- query_embedding column (bge-m3, 1024-dim) for SQL-first demos
+
+**BuyerSearchCaseEmbeddings_384** (50 rows)
+- Same buyer queries embedded with all-minilm (384-dim)
+- Used for model comparison demos
+
+**QueryBank** (10 rows)
+- Pre-embedded queries organized by module number
+- Enables SQL-only demos without Python dependency
 
 **IndexConfigurations** (4 rows)
 - DiskANN index configuration options
