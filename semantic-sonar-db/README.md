@@ -18,7 +18,7 @@ SemanticSonarDB extends the SemanticShoresDB foundation with additional tables a
 
 ### Core Tables
 
-**PropertyListings** (100,000 rows)
+**PropertyListings** (100,036 rows)
 - Property listings with addresses, features, and descriptions
 
 ```sql
@@ -36,7 +36,7 @@ CREATE TABLE PropertyListings (
 );
 ```
 
-**PropertyEmbeddings** (100,000 rows)
+**PropertyEmbeddings** (100,041 rows)
 - Normalized embeddings table using bge-m3 model (1024 dimensions)
 
 ```sql
@@ -73,7 +73,7 @@ CREATE TABLE PropertyEmbeddings_384 (
 **HOADocuments** (15 rows)
 - HOA documents for hybrid search patterns
 
-**BuyerSearchCases** (50 rows) / **BuyerSearchRelevance** (5,000 rows)
+**BuyerSearchCases** (55 rows) / **BuyerSearchRelevance** (1,000,000 rows)
 - Ground truth data for quality metrics
 - query_embedding column (bge-m3, 1024-dim) for SQL-first demos
 
@@ -81,7 +81,7 @@ CREATE TABLE PropertyEmbeddings_384 (
 - Same buyer queries embedded with all-minilm (384-dim)
 - Used for model comparison demos
 
-**QueryBank** (10 rows)
+**QueryBank** (11 rows)
 - Pre-embedded queries organized by module number
 - Enables SQL-only demos without Python dependency
 
@@ -95,7 +95,7 @@ CREATE TABLE PropertyEmbeddings_384 (
 
 | Model | Dimensions | Provider | Count |
 |-------|------------|----------|-------|
-| bge-m3 | 1024 | BAAI/Ollama | 100,000 |
+| bge-m3 | 1024 | BAAI/Ollama | 100,041 |
 | all-minilm | 384 | sentence-transformers/Ollama | 1,010 |
 
 Distance metric: Cosine similarity
