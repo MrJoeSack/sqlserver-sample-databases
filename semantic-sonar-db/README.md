@@ -36,7 +36,7 @@ CREATE TABLE PropertyListings (
 );
 ```
 
-**PropertyEmbeddings** (100,041 rows)
+**PropertyEmbeddings** (100,036 rows)
 - Normalized embeddings table using bge-m3 model (1024 dimensions)
 
 ```sql
@@ -49,7 +49,7 @@ CREATE TABLE PropertyEmbeddings (
 );
 ```
 
-**PropertyEmbeddings_384** (1,010 rows)
+**PropertyEmbeddings_384** (500 rows)
 - Embeddings using all-minilm model (384 dimensions) for model comparison
 
 ```sql
@@ -64,7 +64,7 @@ CREATE TABLE PropertyEmbeddings_384 (
 
 ### Supporting Tables
 
-**EmbeddingModels** (3 rows)
+**EmbeddingModels** (2 rows)
 - Model registry for version tracking
 
 **InspectionReports** (15 rows)
@@ -73,7 +73,7 @@ CREATE TABLE PropertyEmbeddings_384 (
 **HOADocuments** (15 rows)
 - HOA documents for hybrid search patterns
 
-**BuyerSearchCases** (55 rows) / **BuyerSearchRelevance** (1,000,000 rows)
+**BuyerSearchCases** (55 rows)
 - Ground truth data for quality metrics
 - query_embedding column (bge-m3, 1024-dim) for SQL-first demos
 
@@ -85,9 +85,6 @@ CREATE TABLE PropertyEmbeddings_384 (
 - Pre-embedded queries organized by module number
 - Enables SQL-only demos without Python dependency
 
-**IndexConfigurations** (4 rows)
-- DiskANN index configuration options
-
 **SearchConfig** (1 row)
 - Active model configuration for runtime switching
 
@@ -95,8 +92,8 @@ CREATE TABLE PropertyEmbeddings_384 (
 
 | Model | Dimensions | Provider | Count |
 |-------|------------|----------|-------|
-| bge-m3 | 1024 | BAAI/Ollama | 100,041 |
-| all-minilm | 384 | sentence-transformers/Ollama | 1,010 |
+| bge-m3 | 1024 | BAAI/Ollama | 100,036 |
+| all-minilm | 384 | sentence-transformers/Ollama | 500 |
 
 Distance metric: Cosine similarity
 
