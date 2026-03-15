@@ -6,6 +6,10 @@ Real estate property database demonstrating production patterns for SQL Server 2
 
 SemanticSonarDB extends the SemanticShoresDB foundation with additional tables and embeddings for advanced vector search patterns including model comparison, hybrid search, RAG, chunking, and reranking.
 
+## Download
+
+[Download SemanticSonarDB.bak](https://github.com/MrJoeSack/sqlserver-sample-databases/releases/download/v1.0/SemanticSonarDB.bak) (~962 MB)
+
 ## Requirements
 
 - SQL Server 2025 RC1 or later (compatibility level 170)

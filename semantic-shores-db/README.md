@@ -6,6 +6,10 @@ Real estate property database for demonstrating SQL Server 2025 vector search an
 
 SemanticShoresDB contains realistic property listings with pre-computed text embeddings, enabling semantic search demonstrations without requiring external embedding APIs.
 
+## Download
+
+[Download SemanticShoresDB.bak](https://github.com/MrJoeSack/sqlserver-sample-databases/releases/download/v1.0/SemanticShoresDB.bak) (~590 MB)
+
 ## Requirements
 
 - SQL Server 2025 RC1 or later (compatibility level 170)
