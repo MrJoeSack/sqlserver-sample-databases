@@ -124,6 +124,10 @@ CROSS APPLY AI_GENERATE_CHUNKS(
 - **Distance Metric**: Cosine similarity
 - **Purpose**: Enable semantic search on inspection report sections
 
+## Download
+
+[Download SemanticInspectDB.bak](https://github.com/MrJoeSack/sqlserver-sample-databases/releases/download/v1.0/SemanticInspectDB.bak) (~14 MB)
+
 ## Restore Instructions
 
 ```sql

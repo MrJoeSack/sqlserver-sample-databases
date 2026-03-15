@@ -66,6 +66,10 @@ This database is ideal for:
 - **PREVIEW_FEATURES**: Must be enabled for float16 vector support
 - **Memory**: Recommend 8GB+ RAM for optimal performance
 
+## Download
+
+[Download SemanticDepthsDB.bak](https://github.com/MrJoeSack/sqlserver-sample-databases/releases/download/v1.0/SemanticDepthsDB.bak) (~610 MB)
+
 ## Installation
 
 ```sql
