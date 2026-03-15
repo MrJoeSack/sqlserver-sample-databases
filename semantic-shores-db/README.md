@@ -83,13 +83,17 @@ CREATE TABLE search_phrases (
 - **Distance Metric**: Cosine similarity
 - **Purpose**: Enable semantic similarity search on property descriptions
 
+## Download
+
+[Download SemanticShoresDB.bak](https://github.com/MrJoeSack/sqlserver-sample-databases/releases/download/v1.0/SemanticShoresDB.bak) (~590 MB)
+
 ## Restore Instructions
 
 ```sql
 -- WARNING: The REPLACE option will overwrite any existing database named SemanticShoresDB
 -- Verify no production database uses this name before running this command
 RESTORE DATABASE SemanticShoresDB
-FROM DISK = 'path\to\SemanticShoresDB_20251018.bak'
+FROM DISK = 'path\to\SemanticShoresDB.bak'
 WITH MOVE 'SemanticShoresDB' TO 'C:\SQLData\SemanticShoresDB.mdf',
      MOVE 'SemanticShoresDB_log' TO 'C:\SQLData\SemanticShoresDB_log.ldf',
      REPLACE;

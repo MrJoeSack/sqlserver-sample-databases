@@ -97,6 +97,10 @@ CREATE TABLE PropertyEmbeddings_384 (
 
 Distance metric: Cosine similarity
 
+## Download
+
+[Download SemanticSonarDB.bak](https://github.com/MrJoeSack/sqlserver-sample-databases/releases/download/v1.0/SemanticSonarDB.bak) (~962 MB)
+
 ## Restore Instructions
 
 ```sql
