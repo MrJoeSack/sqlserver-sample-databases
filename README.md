@@ -23,9 +23,11 @@ Extends SemanticShoresDB with normalized embedding tables, model comparison data
 
 ## Usage
 
+1. Download the .bak file from the [Releases page](https://github.com/MrJoeSack/sqlserver-sample-databases/releases) (or use the download link in each database's README)
+2. Restore using the RESTORE DATABASE command (see each README for details)
+
 Each database folder contains:
-- Database backup (.bak file)
-- README with schema details
+- README with schema details, download link, and restore instructions
 - Sample queries (where applicable)
 
 ## License
